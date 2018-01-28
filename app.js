@@ -36,12 +36,25 @@ app.get('/blogs', function(req, res){
 
 
 
+// NEW ROUTE
 
+app.get('/blogs/new', function(req, res){
+	res.render('new');
+});
 
+// CREATE ROUTE
 
-
-
-
+app.post('/blogs', function(req, res){
+	// create blog
+	Blog.create(req.body.blog, function(err, newBlog){
+		if(err){
+			res.render('new');
+		}else{
+			res.redirect('/blogs');
+		};
+	})
+	//then, redirect to the index
+});
 
 app.listen(3000, function(req, res){
 	console.log('the Serving is serving up the BLOGO');
